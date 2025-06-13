@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI占い師</title>
+  <link rel="stylesheet" href="index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^0.12.0",
+    "marked": "https://esm.sh/marked@^15.0.7",
+    "path": "https://esm.sh/path@^0.12.7",
+    "url": "https://esm.sh/url@^0.11.4",
+    "vite": "https://esm.sh/vite@^6.3.5"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <!-- Character Selection Screen - Now the first screen -->
+  <div id="character-selection-container">
+    <h2>どのAI占い師に相談しますか？</h2>
+    <div class="character-options">
+      <button class="character-option" data-character="kun">
+        <img src="images/01_myoujou_hikaru.png" alt="明星ヒカル" class="character-avatar">
+        <span class="character-name">明星ヒカル</span>
+        <span class="character-description">四柱推命で占うフレンドリーな相談相手</span>
+      </button>
+      <button class="character-option" data-character="san">
+        <img src="images/01_Sefira_Yui.png" alt="セフィラ＝ユイ" class="character-avatar">
+        <span class="character-name">セフィラ＝ユイ</span>
+        <span class="character-description">タロットで占うミステリアスな占い師</span>
+      </button>
+      <button class="character-option" data-character="chan">
+        <img src="images/01_hosikuzu_amane.png" alt="星屑あまね" class="character-avatar">
+        <span class="character-name">星屑あまね</span>
+        <span class="character-description">星座占いのツンデレ地雷系メスガキ</span>
+      </button>
+    </div>
+    <p id="character-selection-error" class="form-error-message" style="color: #d8000c; margin-top: 15px; text-align: center; font-size: 0.9em; display: none;"></p>
+  </div>
+
+  <div id="chat-app-container" style="display: none;">
+    <header class="chat-header">
+      <div class="header-left">
+        <span class="back-arrow" role="button" aria-label="Back">&lt;</span>
+        <span class="chat-channel">70</span>
+        <h1 class="chat-title">AI占い師</h1>
+      </div>
+      <div class="header-right">
+        <span class="icon" role="button" aria-label="Search">&#x1F50D;</span>
+        <span class="icon" role="button" aria-label="Scan">&#x25EE;</span>
+        <span class="icon" role="button" aria-label="Menu">&#x2630;</span>
+      </div>
+    </header>
+    <main id="chat-container" aria-live="polite"></main>
+    <div id="post-appraisal-options" style="display: none;">
+      <button id="consult-again-button">もう一度占う</button>
+      <button id="back-to-top-button">トップに戻る</button>
+    </div>
+    <footer class="input-area">
+      <input type="text" id="message-input" placeholder="メッセージを入力..." aria-label="Message input">
+      <button id="send-button" aria-label="Send message">送信</button>
+      <button id="create-appraisal-button" style="display: none;">鑑定書を作成</button>
+    </footer>
+  </div>
+
+  <!-- Full Page Appraisal Report Modal -->
+  <div id="appraisal-report-modal" class="modal report-modal" style="display: none;">
+    <div class="report-modal-content">
+      <div class="report-header">
+        <h2 id="report-title-text">鑑定結果</h2> 
+        <span id="report-date" class="report-date-text"></span>
+      </div>
+      <img id="report-character-image" src="" alt="鑑定士の画像" class="report-character-image-style">
+      <div class="report-user-details">
+        <p><strong>お名前:</strong> <span id="report-user-name"></span></p>
+        <p><strong>生年月日:</strong> <span id="report-user-dob"></span></p>
+        <p><strong>性別:</strong> <span id="report-user-gender"></span></p>
+      </div>
+      <hr class="report-separator">
+      <div id="report-ai-response" class="report-body-text">
+        <!-- AI's appraisal text goes here -->
+      </div>
+      <div class="report-footer">
+        <span>AI占い</span>
+      </div>
+      <button id="close-appraisal-report-button" class="close-report-button">閉じる</button>
+    </div>
+  </div>
+
+  <script type="module" src="index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "AI占い師s",
+  "description": "Example chat app built with Gemini",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
