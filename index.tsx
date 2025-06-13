@@ -1,4 +1,23 @@
+declare module '@google/genai' {
+    export class GoogleGenAI {
+        constructor(config: { apiKey: string });
+        chats: {
+            create: (options: any) => Chat;
+        };
+        models: {
+            generateContent: (options: any) => Promise<GenerateContentResponse>;
+        };
+    }
 
+    export interface Chat {
+        sendMessage: (options: { message: string }) => Promise<GenerateContentResponse>;
+        sendMessageStream: (options: { message: string }) => AsyncIterable<{ text?: string }>;
+    }
+
+    export interface GenerateContentResponse {
+        text: string;
+    }
+}
 /**
  * @license
  * Copyright 2025 Google LLC
